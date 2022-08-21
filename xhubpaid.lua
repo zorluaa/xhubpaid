@@ -1,24 +1,82 @@
---docs: https://prezt.gitbook.io/azure-library/
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Splix"))()
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/azure", true))()
+local window = library:new({textsize = 13.5,font = Enum.Font.RobotoMono,name = "xhub beta build",color = Color3.fromRGB(225,58,81)})
 
---- white list system
+local tab = window:page({name = "Main"})
+local tab1 = window:page({name = "Anti Aim"})
+local tab2 = window:page({name = "Misc"})
+local tab3 = window:page({name = "God mode"})
+
+local section = tab:section({name = "Aiming",side = "left",size = 250})
+local section1 = tab1:section({name = "Anti Aims",side = "left",size = 250})
+local section2 = tab2:section({name = "Misc",side = "left",size = 250})
+local section3 = tab3:section({name = "God Modes",side = "left",size = 250})
+
+section1:toggle({name = "UnderGround AA",def = false,callback = function(value)
+ local Toggled = false
+local KeyCode = 'z'
+
+
+function AA()
+    local oldVelocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, -70, oldVelocity.Z)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, oldVelocity.Y, oldVelocity.Z)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, -70, oldVelocity.Z)
+    game.Players.LocalPlayer.Character.Humanoid.HipHeight = 2.14
+end
+
+game:GetService('UserInputService').InputBegan:Connect(function(Key)
+    if Key.KeyCode == Enum.KeyCode[KeyCode:upper()] and not game:GetService('UserInputService'):GetFocusedTextBox() then
+        if Toggled then
+            Toggled = false
+            game.Players.LocalPlayer.Character.Humanoid.HipHeight = 10
+
+        elseif not Toggled then
+            Toggled = true
+
+            while Toggled do
+                AA()
+                task.wait()
+            end
+        end
+    end
+end)
+  tog = value
+  print(tog)
+end})
+
+
+section1:button({name = "Tp Anti Aim",callback = function()
+    local Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+--
+getgenv().Yes = nil
+while getgenv().Yes == true  do
+    task.wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = (CFrame.new(Position) + Vector3.new(math.random(-15, 15), math.random(-15, 15), math.random(-15, 15))) * CFrame.Angles(math.rad(math.random(-180, 180)), math.rad(math.random(-180, 180)), math.rad(math.random(-180, 180)))
+end
+   print('hot ui lib')
+end})
 
 
 
-local AimbotTab = Library:CreateTab("xhub main", "Silent Aim And More")
-local AntiAimTab = Library:CreateTab("Anti Aim", "Anti Aims")
-local GodTab = Library:CreateTab("Godmodes", "God guns/god melee")
-local MiscTab = Library:CreateTab("Misc", "Extra Stuff")
 
-AimbotTab:CreateButton(
-    "Silent Aim",
-    function()
-        -- 69- 0.11934
+
+--- silent aims
+section:button({name = "Silent Aim",callback = function()
+    -- Mattys
+
+--- configuration
+
+
+getgenv().Mattyy = true
+getgenv().Matty = true
+
+--- variables
+
 local CC = game:GetService'Workspace'.CurrentCamera
 local Plr
 local enabled = false
-local accomidationfactor = 0.129145
+local accomidationfactor = 0.131 -- 0.13123 --0.1572
 local mouse = game.Players.LocalPlayer:GetMouse()
 local placemarker = Instance.new("Part", game.Workspace)
 local guimain = Instance.new("Folder", game.CoreGui)
@@ -30,7 +88,7 @@ function makemarker(Parent, Adornee, Color, Size, Size2)
     e.Size = UDim2.new(Size, Size2, Size, Size2)
     e.AlwaysOnTop = true
     local a = Instance.new("Frame", e)
-    a.Size = UDim2.new(3.5, 0, 1, 0)
+    a.Size = UDim2.new(3, 0, 1, 0)
     a.BackgroundTransparency = 0.4
     a.BackgroundColor3 = Color
     local g = Instance.new("UICorner", a)
@@ -42,17 +100,17 @@ local data = game.Players:GetPlayers()
 function noob(player)
     local character
     repeat wait() until player.Character
-    local handler = makemarker(guimain, player.Character:WaitForChild("HumanoidRootPart"), Color3.fromRGB(0, 76, 153), 0.0, 0)
+    local handler = makemarker(guimain, player.Character:WaitForChild("LowerTorso"), Color3.fromRGB(0, 76, 153), 0.0, 0)
     handler.Name = player.Name
-    player.CharacterAdded:connect(function(Char) handler.Adornee = Char:WaitForChild("HumanoidRootPart") end)
+    player.CharacterAdded:connect(function(Char) handler.Adornee = Char:WaitForChild("LowerTorso") end)
     
 	local TextLabel = Instance.new("TextLabel", handler)
 	TextLabel.BackgroundTransparency = 1
 	TextLabel.Position = UDim2.new(0, 0, 0, -50)
-	TextLabel.Size = UDim2.new(0, 55, 0, 75)
+	TextLabel.Size = UDim2.new(0, 100, 0, 100)
 	TextLabel.Font = Enum.Font.SourceSansSemibold
 	TextLabel.TextSize = 14
-	TextLabel.TextColor3 = Color3.new(1, 1, 1)
+	TextLabel.TextColor3 = Color3.new(3, 5, 1)
 	TextLabel.TextStrokeTransparency = 0
 	TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
 	TextLabel.Text = 'Name: '..player.Name
@@ -84,9 +142,9 @@ end)
 spawn(function()
     placemarker.Anchored = true
     placemarker.CanCollide = false
-    placemarker.Size = Vector3.new(0.1, 0.1, 0.1)
+    placemarker.Size = Vector3.new(0.9, 0.9, 0.9)
     placemarker.Transparency = 10
-    makemarker(placemarker, placemarker, Color3.fromRGB(0, 0, 35), 0.55, 0)
+    makemarker(placemarker, placemarker, Color3.fromRGB(51, 4, 34), 0.22, 0)
 end)    
 
 mouse.KeyDown:Connect(function(k)
@@ -119,7 +177,7 @@ function getClosestPlayerToCursor()
 end
 
 	game:GetService"RunService".Stepped:connect(function()
-		if enabled and Plr.Character and Plr.Character:FindFirstChild("HumanoidRootPart") then
+		if enabled and Plr.Character and Plr.Character:FindFirstChild("UpperTorso") then
 			placemarker.CFrame = CFrame.new(Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor))
 		else
 			placemarker.CFrame = CFrame.new(0, 9999, 0)
@@ -132,132 +190,183 @@ end
 	mt.__namecall = newcclosure(function(...)
 		local args = {...}
 		if enabled and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" then
-			args[3] = Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor)
+			args[3] = Plr.Character.UpperTorso.Position+(Plr.Character.UpperTorso.Velocity*accomidationfactor)
 			return old(unpack(args))
 		end
 		return old(...)
 	end)
-        --you dont need "arg" for a button
-        print("Silent Aim Is on.")
-    end
-)
-
-
-
-
-AntiAimTab:CreateButton(
-    "UnderGround AA",
-    function()
-        local Toggled = false
-local KeyCode = 'z'
-
-
-function AA()
-    local oldVelocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
-    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, -70, oldVelocity.Z)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, oldVelocity.Y, oldVelocity.Z)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, -70, oldVelocity.Z)
-    game.Players.LocalPlayer.Character.Humanoid.HipHeight = 2.15
-end
-
-game:GetService('UserInputService').InputBegan:Connect(function(Key)
-    if Key.KeyCode == Enum.KeyCode[KeyCode:upper()] and not game:GetService('UserInputService'):GetFocusedTextBox() then
-        if Toggled then
-            Toggled = false
-            game.Players.LocalPlayer.Character.Humanoid.HipHeight = 10
-
-        elseif not Toggled then
-            Toggled = true
-
-            while Toggled do
-                AA()
-                task.wait()
+	if getgenv.Mattyy == true then
+	if Plr.Character.Humanoid.Jump == true and Plr.Character.Humanoid.FloorMaterial == Enum.Material.Air then
+        game:GetService"RunService".Stepped:connect(function()
+            if enabled and Plr.Character and Plr.Character:FindFirstChild("HumanoidRootPart") then
+                placemarker.CFrame = CFrame.new(Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor))
+            else
+                placemarker.CFrame = CFrame.new(0, 9999, 0)
             end
+        end)
+        
+        local mt = getrawmetatable(game)
+        local old = mt.__namecall
+        setreadonly(mt, false)
+        mt.__namecall = newcclosure(function(...)
+            local args = {...}
+            if enabled and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" then
+                args[3] = Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor)
+                return old(unpack(args))
+            end
+            return old(...)
+        end)
+    else
+        game:GetService"RunService".Stepped:connect(function()
+            if enabled and Plr.Character and Plr.Character:FindFirstChild("UpperTorso") then
+                placemarker.CFrame = CFrame.new(Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor))
+            else
+                placemarker.CFrame = CFrame.new(0, 9999, 0)
+            end
+        end)
+        local mt = getrawmetatable(game)
+        local old = mt.__namecall
+        setreadonly(mt, false)
+        mt.__namecall = newcclosure(function(...)
+            local args = {...}
+            if enabled and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" then
+                args[3] = Plr.Character.UpperTorso.Position+(Plr.Character.UpperTorso.Velocity*accomidationfactor)
+                return old(unpack(args))
+            end
+            return old(...)
+        end)
+        if getgenv.Matty == true then
+            if Plr.Character.Humanoid.Fall == true and Plr.Character.Humanoid.FloorMaterial == Enum.Material.Air then
+                game:GetService"RunService".Stepped:connect(function()
+                    if enabled and Plr.Character and Plr.Character:FindFirstChild("UpperTorso") then
+                        placemarker.CFrame = CFrame.new(Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor))
+                    else
+                        placemarker.CFrame = CFrame.new(0, 9999, 0)
+                    end
+                end)
+                local mt = getrawmetatable(game)
+                local old = mt.__namecall
+                setreadonly(mt, false)
+                mt.__namecall = newcclosure(function(...)
+                    local args = {...}
+                    if enabled and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" then
+                        args[3] = Plr.Character.UpperTorso.Position+(Plr.Character.UpperTorso.Velocity*accomidationfactor)
+                        return old(unpack(args))
+                    end
+                    return old(...)
+                end)
+            else
+                game:GetService"RunService".Stepped:connect(function()
+                    if enabled and Plr.Character and Plr.Character:FindFirstChild("HumanoidRootPart") then
+                        placemarker.CFrame = CFrame.new(Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor))
+                    else
+                        placemarker.CFrame = CFrame.new(0, 9999, 0)
+                    end
+                end)
+                local mt = getrawmetatable(game)
+                local old = mt.__namecall
+                setreadonly(mt, false)
+                mt.__namecall = newcclosure(function(...)
+                    local args = {...}
+                    if enabled and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" then
+                        args[3] = Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor)
+                        return old(unpack(args))
+                    end
+                    return old(...)
+                end)
+            end
+        end
+	end
+end
+   print('hot ui lib')
+end})
+
+
+
+
+----------------------------------------------------------------------------------
+section2:button({name = "Fly (X)",callback = function()
+    _G.Speed = 150
+_G.Key = Enum.KeyCode.X
+
+local UIS = game:GetService("UserInputService")
+local OnRender = game:GetService("RunService").RenderStepped
+
+local Player = game:GetService("Players").LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+
+local Camera = workspace.CurrentCamera
+local Root = Character:WaitForChild("HumanoidRootPart")
+
+local C1, C2, C3;
+local UntitledHood = {Flying = false, Forward = false, Backward = false, Left = false, Right = false}
+C1 = UIS.InputBegan:Connect(function(Input)
+    if Input.UserInputType == Enum.UserInputType.Keyboard then
+        if Input.KeyCode == _G.Key then
+            UntitledHood.Flying = not UntitledHood.Flying
+            Root.Anchored = UntitledHood.Flying
+        elseif Input.KeyCode == Enum.KeyCode.W then
+            UntitledHood.Forward = true
+        elseif Input.KeyCode == Enum.KeyCode.S then
+            UntitledHood.Backward = true
+        elseif Input.KeyCode == Enum.KeyCode.A then
+            UntitledHood.Left = true
+        elseif Input.KeyCode == Enum.KeyCode.D then
+            UntitledHood.Right = true
         end
     end
 end)
-        --you dont need "arg" for a button
-        print("UnderGround AA is on")
+
+C2 = UIS.InputEnded:Connect(function(Input)
+    if Input.UserInputType == Enum.UserInputType.Keyboard then
+        if Input.KeyCode == Enum.KeyCode.W then
+            UntitledHood.Forward = false
+        elseif Input.KeyCode == Enum.KeyCode.S then
+            UntitledHood.Backward = false
+        elseif Input.KeyCode == Enum.KeyCode.A then
+            UntitledHood.Left = false
+        elseif Input.KeyCode == Enum.KeyCode.D then
+            UntitledHood.Right = false
+        end
     end
-)
-
-              MiscTab:CreateButton(
-    "AutoClicker",
-    function()
-        local time = 0.01 --decrease if too slow increase if too fast
-
-click = false
-m = game.Players.LocalPlayer:GetMouse()
-m.KeyDown:connect(function(key)
-if key == "v" then
-if click == true then click = false
-elseif
-click == false then click = true
-
-while click == true do 
-wait(time)
-mouse1click()
-end
-end
-end
 end)
-        --you dont need "arg" for a button
-        print("AutoClicker is on.")
+
+C3 = Camera:GetPropertyChangedSignal("CFrame"):Connect(function()
+    if UntitledHood.Flying then
+        Root.CFrame = CFrame.new(Root.CFrame.Position, Root.CFrame.Position + Camera.CFrame.LookVector)
     end
-)
+end)
 
-
-           AntiAimTab:CreateButton(
-    "Tp Anti Aim",
-    function()
-        getgenv().BlatantAA = true
-local Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-while getgenv().BlatantAA == true  do
-    task.wait()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = (CFrame.new(Position) + Vector3.new(math.random(-15, 15), math.random(-15, 15), math.random(-15, 15))) * CFrame.Angles(math.rad(math.random(-180, 180)), math.rad(math.random(-180, 180)), math.rad(math.random(-180, 180)))
+while true do 
+    local Delta = OnRender:Wait()
+    if UntitledHood.Flying then
+        if UntitledHood.Forward then
+            Root.CFrame = Root.CFrame + (Camera.CFrame.LookVector * (Delta * _G.Speed))
+        end
+        if UntitledHood.Backward then
+            Root.CFrame = Root.CFrame + (-Camera.CFrame.LookVector * (Delta * _G.Speed))
+        end
+        if UntitledHood.Left then
+            Root.CFrame = Root.CFrame + (-Camera.CFrame.RightVector * (Delta * _G.Speed))
+        end
+        if UntitledHood.Right then
+            Root.CFrame = Root.CFrame + (Camera.CFrame.RightVector * (Delta * _G.Speed))
+        end
+    end
 end
-        --you dont need "arg" for a button
-        print("Tp Anti Aim Is on.")
-    end
-)
-
-
-
---god Godmodes
-
-           GodTab:CreateButton(
-    "God guns",
-    function()
-        local localPlayer = game:GetService('Players').LocalPlayer;
-                local localCharacter = localPlayer.Character;
-                localCharacter:FindFirstChildOfClass('Humanoid').Health = 0;
-                local newCharacter = localPlayer.CharacterAdded:Wait();
-                local spoofFolder = Instance.new('Folder');
-                spoofFolder.Name = 'FULLY_LOADED_CHAR';
-                spoofFolder.Parent = newCharacter;
-                newCharacter:WaitForChild('RagdollConstraints'):Destroy();
-                local spoofValue = Instance.new('BoolValue', newCharacter);
-                spoofValue.Name = 'RagdollConstraints';
-                local name = game.Players.LocalPlayer.Name
-                local lol =    game.Workspace:WaitForChild(name)
-                local money = Instance.new("Folder",game.Players.LocalPlayer.Character);money.Name = "FULLY_LOADED_CHAR"
-                lol.Parent = game.Workspace.Players
-                game.Players.LocalPlayer.Character:WaitForChild("BodyEffects")
-                game.Players.LocalPlayer.Character.BodyEffects.BreakingParts:Destroy()
-        --you dont need "arg" for a button
-        print("God is on.")
-    end
-)
+   print('hot ui lib')
+end})
 
 
 
 
---god Godmodes
 
-           GodTab:CreateButton(
-    "God guns",
-    function()
-        local localPlayer = game:GetService('Players').LocalPlayer;
+----------------
+
+
+
+section3:button({name = "God Melee",callback = function()
+    local localPlayer = game:GetService('Players').LocalPlayer;
 				local localCharacter = localPlayer.Character;
 				localCharacter:FindFirstChildOfClass('Humanoid').Health = 0;
 				local newCharacter = localPlayer.CharacterAdded:Wait();
@@ -406,150 +515,29 @@ end
 						end
 					end)
 				end
-        --you dont need "arg" for a button
-        print("God is on.")
-    end
-)
+   print('hot ui lib')
+end})
 
 
 
 
---mouse lock 
-           AimbotTab:CreateButton(
-    "Mouse Lock (C)",
-    function()
-        local MouseLock = {
-    Settings = {
-        Enabled = false,
-        Key = 'c',
-        Prediction = 0.135,
-        AimPart = 'HumanoidRootPart'
-    }
-}
 
-local CurrentCamera = game:GetService("Workspace").CurrentCamera
-local RunService = game:GetService("RunService")
-local Mouse = game.Players.LocalPlayer:GetMouse()
-local Plr
-
-function FindClosestPlayer()
-    local closestPlayer
-    local shortestDistance = math.huge
-
-    for i, v in pairs(game.Players:GetPlayers()) do
-        if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") and
-            v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("HumanoidRootPart") then
-            local pos = CurrentCamera:WorldToViewportPoint(v.Character.PrimaryPart.Position)
-            local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(Mouse.X, Mouse.Y)).magnitude
-            if magnitude < shortestDistance then
-                closestPlayer = v
-                shortestDistance = magnitude
-            end
-        end
-    end
-    return closestPlayer
-end
-
-Mouse.KeyDown:Connect(function(KeyPressed)
-    if KeyPressed == (MouseLock.Settings.Key) then
-        if MouseLock.Settings.Enabled == true then
-            MouseLock.Settings.Enabled = false
-            Plr = FindClosestPlayer()
-        else
-            Plr = FindClosestPlayer()
-            MouseLock.Settings.Enabled = true
-
-        end
-    end
-end)
-
-RunService.Stepped:connect(function()
-    if MouseLock.Settings.Enabled == true then
-        local Vector = CurrentCamera:WorldToScreenPoint(Plr.Character[MouseLock.Settings.AimPart].Position +
-                                                            (Plr.Character[MouseLock.Settings.AimPart].Velocity *
-                                                                MouseLock.Settings.Prediction))
-        mousemoverel(Vector.X - Mouse.X, Vector.Y - Mouse.Y)
-    end
-
-end)
-        --you dont need "arg" for a button
-        print("Mouse lock is on")
-    end
-)
-
----
-           MiscTab:CreateButton(
-    "Fly (X)",
-    function()
-         _G.Speed = 150
-_G.Key = Enum.KeyCode.X
-
-local UIS = game:GetService("UserInputService")
-local OnRender = game:GetService("RunService").RenderStepped
-
-local Player = game:GetService("Players").LocalPlayer
-local Character = Player.Character or Player.CharacterAdded:Wait()
-
-local Camera = workspace.CurrentCamera
-local Root = Character:WaitForChild("HumanoidRootPart")
-
-local C1, C2, C3;
-local UntitledHood = {Flying = false, Forward = false, Backward = false, Left = false, Right = false}
-C1 = UIS.InputBegan:Connect(function(Input)
-    if Input.UserInputType == Enum.UserInputType.Keyboard then
-        if Input.KeyCode == _G.Key then
-            UntitledHood.Flying = not UntitledHood.Flying
-            Root.Anchored = UntitledHood.Flying
-        elseif Input.KeyCode == Enum.KeyCode.W then
-            UntitledHood.Forward = true
-        elseif Input.KeyCode == Enum.KeyCode.S then
-            UntitledHood.Backward = true
-        elseif Input.KeyCode == Enum.KeyCode.A then
-            UntitledHood.Left = true
-        elseif Input.KeyCode == Enum.KeyCode.D then
-            UntitledHood.Right = true
-        end
-    end
-end)
-
-C2 = UIS.InputEnded:Connect(function(Input)
-    if Input.UserInputType == Enum.UserInputType.Keyboard then
-        if Input.KeyCode == Enum.KeyCode.W then
-            UntitledHood.Forward = false
-        elseif Input.KeyCode == Enum.KeyCode.S then
-            UntitledHood.Backward = false
-        elseif Input.KeyCode == Enum.KeyCode.A then
-            UntitledHood.Left = false
-        elseif Input.KeyCode == Enum.KeyCode.D then
-            UntitledHood.Right = false
-        end
-    end
-end)
-
-C3 = Camera:GetPropertyChangedSignal("CFrame"):Connect(function()
-    if UntitledHood.Flying then
-        Root.CFrame = CFrame.new(Root.CFrame.Position, Root.CFrame.Position + Camera.CFrame.LookVector)
-    end
-end)
-
-while true do 
-    local Delta = OnRender:Wait()
-    if UntitledHood.Flying then
-        if UntitledHood.Forward then
-            Root.CFrame = Root.CFrame + (Camera.CFrame.LookVector * (Delta * _G.Speed))
-        end
-        if UntitledHood.Backward then
-            Root.CFrame = Root.CFrame + (-Camera.CFrame.LookVector * (Delta * _G.Speed))
-        end
-        if UntitledHood.Left then
-            Root.CFrame = Root.CFrame + (-Camera.CFrame.RightVector * (Delta * _G.Speed))
-        end
-        if UntitledHood.Right then
-            Root.CFrame = Root.CFrame + (Camera.CFrame.RightVector * (Delta * _G.Speed))
-        end
-    end
-end
-        --you dont need "arg" for a button
-        print("fly is on.")
-    end
-)
+section3:button({name = "God Guns",callback = function()
+    local localPlayer = game:GetService('Players').LocalPlayer;
+                local localCharacter = localPlayer.Character;
+                localCharacter:FindFirstChildOfClass('Humanoid').Health = 0;
+                local newCharacter = localPlayer.CharacterAdded:Wait();
+                local spoofFolder = Instance.new('Folder');
+                spoofFolder.Name = 'FULLY_LOADED_CHAR';
+                spoofFolder.Parent = newCharacter;
+                newCharacter:WaitForChild('RagdollConstraints'):Destroy();
+                local spoofValue = Instance.new('BoolValue', newCharacter);
+                spoofValue.Name = 'RagdollConstraints';
+                local name = game.Players.LocalPlayer.Name
+                local lol =    game.Workspace:WaitForChild(name)
+                local money = Instance.new("Folder",game.Players.LocalPlayer.Character);money.Name = "FULLY_LOADED_CHAR"
+                lol.Parent = game.Workspace.Players
+                game.Players.LocalPlayer.Character:WaitForChild("BodyEffects")
+                game.Players.LocalPlayer.Character.BodyEffects.BreakingParts:Destroy()
+   print('hot ui lib')
+end})
