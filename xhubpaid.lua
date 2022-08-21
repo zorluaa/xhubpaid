@@ -1,12 +1,10 @@
--docs: https://prezt.gitbook.io/azure-library/
-
-local player = game.Players.LocalPlayer  
-
-
-
-
+--docs: https://prezt.gitbook.io/azure-library/
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/azure", true))()
+
+--- white list system
+
+
 
 local AimbotTab = Library:CreateTab("xhub main", "Silent Aim And More")
 local AntiAimTab = Library:CreateTab("Anti Aim", "Anti Aims")
