@@ -2,10 +2,7 @@
 
 local player = game.Players.LocalPlayer  
 
-if player.Name == "14Zor then
-print ("Whitelisted)
-else
-player:kick("Not" .. " Whitelisted")
+
 
 
 
