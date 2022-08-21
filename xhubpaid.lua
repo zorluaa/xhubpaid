@@ -1,5 +1,14 @@
 -docs: https://prezt.gitbook.io/azure-library/
 
+local player = game.Players.LocalPlayer  
+
+if player.Name == "14Zor then
+print ("Whitelisted)
+else
+player:kick("Not" .. " Whitelisted")
+
+
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/azure", true))()
 
 local AimbotTab = Library:CreateTab("xhub main", "Silent Aim And More")
